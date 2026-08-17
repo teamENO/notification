@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FCM登録</title>
+</head>
+<body>
+
+<h2>通知登録ページ</h2>
+<button id="regBtn">通知を許可して登録</button>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging.js";
+
+  // ★ KenzoのFirebase設定に書き換える
+  const firebaseConfig = {
+    apiKey: "AIzaSyA5X-J0s1SAgw8zXn4Y-_ekHao0c67sn-k",,
+    authDomain: "send-92385.firebaseapp.com",
+    projectId: "send-92385",
+    messagingSenderId: "912374083524",
+    appId: "1:912374083524:web:a33e61f6f5bc71c207be91"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const messaging = getMessaging(app);
+
+  // ★ KenzoのGAS WebアプリURLに書き換える
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbyX2QN743LK5_hB5hlS5SgCz8rQ6mvDJR9PHqmn5VAIwdi3a2Kq2eXOpnZ4MQGRKAs64w/exec";
+
+  document.getElementById("regBtn").onclick = async () => {
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
+      alert("通知が許可されていません");
+      return;
+    }
+
+    const token = await getToken(messaging, {
+      vapidKey: "YOUR_VAPID_PUBLIC_KEY"
+    });
+
+    alert("トークン取得: " + token);
+
+    await fetch(GAS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token })
+    });
+
+    alert("GASへトークン送信完了");
+  };
+</script>
+
+</body>
+</html>
