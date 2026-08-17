@@ -3,11 +3,13 @@ importScripts("https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-com
 
 // ★ KenzoのFirebase設定に書き換える
 firebase.initializeApp({
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA5X-J0s1SAgw8zXn4Y-_ekHao0c67sn-k",
+    authDomain: "send-92385.firebaseapp.com",
+    projectId: "send-92385",
+    messagingSenderId: "912374083524",
+    appId: "1:912374083524:web:a33e61f6f5bc71c207be91"
+  };
+
 });
 
 const messaging = firebase.messaging();
